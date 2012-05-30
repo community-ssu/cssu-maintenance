@@ -18,9 +18,16 @@ public:
     ~PackageListDialog();
     void populateForString(QString string);
 
+signals:
+    void dependsLineChanged(QString newLine);
+
 private:
     Ui::PackageListDialog *ui;
+    QString dependsLine();
+    QString m_originalDependsLine;
 
+private slots:
+    void accept();
 };
 
 #endif // PACKAGELISTDIALOG_H
