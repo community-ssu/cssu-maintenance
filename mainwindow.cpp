@@ -115,7 +115,6 @@ void MainWindow::processControlFileContents(QString fileContents)
 
         if (line.contains("XB-Maemo-Flags")) {
             maemoFlags = line.remove("XB-Maemo-Flags:  ", Qt::CaseInsensitive);
-            qDebug() << maemoFlags;
         }
     }
 
@@ -136,9 +135,15 @@ void MainWindow::processControlFileContents(QString fileContents)
 void MainWindow::onDependsLineEditClicked()
 {
     PackageListDialog *dependsDialog = new PackageListDialog(this);
+    connect(dependsDialog, SIGNAL(dependsLineChanged(QString)), this, SLOT(onDependsLineChanged(QString)));
     dependsDialog->setAttribute(Qt::WA_DeleteOnClose);
     dependsDialog->populateForString(ui->dependsLineEdit->text());
     dependsDialog->show();
+}
+
+void MainWindow::onDependsLineChanged(QString dependsLine)
+{
+    ui->dependsLineEdit->setText(dependsLine);
 }
 
 QString MainWindow::prepareControlFileAsString()

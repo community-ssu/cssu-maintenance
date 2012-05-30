@@ -34,6 +34,7 @@ private slots:
     void openFile();
     void onDependsLineEditClicked();
     void preview();
+    void onDependsLineChanged(QString);
 };
 
 #endif // MAINWINDOW_H
